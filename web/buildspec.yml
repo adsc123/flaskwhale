@@ -5,7 +5,7 @@ phases:
         runtime-versions:
             python: 3.7
             docker: 18
-    pre-build:
+    pre_build:
         commands:
             - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
             - IMAGE_TAG=${COMMIT_HASH:=latest}
