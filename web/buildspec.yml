@@ -8,10 +8,8 @@ phases:
         commands:
             - eval `aws ecr get-login --no-include-email --region eu-west-2`
             - CURRENT_VERSION=$(aws ecr describe-images --repository-name ips-test-repo --output text --query 'sort_by(imageDetails,& imagePushedAt)[*].imageTags[*]' | tr '\t' '\n' | tail -1)
-            - echo $CURRENT_VERSION
-            - TEST=0
-            - COMMIT_HASH=$(expr $TEST + 1)
-            - IMAGE_TAG=${COMMIT_HASH:=latest}
+            - COMMIT_HASH=${CURRENT_VERSION:=0}
+            - IMAGE_TAG=$(expr $COMMIT_HASH + 1)
     build:
         commands:
             - docker build -t ips-ci-test ./web/
