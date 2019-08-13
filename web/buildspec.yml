@@ -9,7 +9,7 @@ phases:
             - eval `aws ecr get-login --no-include-email --region eu-west-2`
             - CURRENT_VERSION=$(aws ecr describe-images --repository-name ips-test-repo --output text --query 'sort_by(imageDetails,& imagePushedAt)[*].imageTags[*]' | tr '\t' '\n' | tail -1)
             - echo $CURRENT_VERSION
-            - COMMIT_HASH=eval $TEMP + 1
+            - COMMIT_HASH=eval $CURRENT_VERSION + 1
             - IMAGE_TAG=${COMMIT_HASH:=latest}
     build:
         commands:
