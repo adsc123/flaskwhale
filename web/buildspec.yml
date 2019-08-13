@@ -6,7 +6,8 @@ phases:
             docker: 18
     pre_build:
         commands:
-            - IMAGE_TAG=${$CODEBUILD_START_TIME:=latest}
+            - COMMIT_HASH=$(echo $CODEBUILD_START_TIME)
+            - IMAGE_TAG=${COMMIT_HASH:=latest}
     build:
         commands:
             - docker build -t ips-ci-test ./web/
