@@ -12,9 +12,10 @@ phases:
             - IMAGE_TAG=$(expr $COMMIT_HASH + 1)
     build:
         commands:
-            - docker build -t ips-ci-test ./web/
+            - docker build -t ips-ci-test:latest ./web/
             
     post_build:
         commands:
             - docker tag ips-ci-test:latest 014669633018.dkr.ecr.eu-west-2.amazonaws.com/ips-test-repo:$IMAGE_TAG
             - docker push 014669633018.dkr.ecr.eu-west-2.amazonaws.com/ips-test-repo:$IMAGE_TAG
+            - docker push 014669633018.dkr.ecr.eu-west-2.amazonaws.com/ips-test-repo:latest
