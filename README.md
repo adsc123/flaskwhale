@@ -1,2 +1,2 @@
 # flaskwhale
-A project to test CI auto build.
+A project to test CI auto build. Test
